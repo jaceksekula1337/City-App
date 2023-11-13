@@ -1,0 +1,23 @@
+{
+  "properties": [
+    {
+      "name": "Property 1",
+      "type": "text",
+      "value": "Text Value 1",
+      "group": "Group 1"
+    },
+    {
+      "name": "Property 2",
+      "type": "checkbox",
+      "value": true,
+      "group": "Group 1"
+    },
+    {
+      "name": "Property 3",
+      "type": "combobox",
+      "value": "Option 1",
+      "group": "Group 2",
+      "options": ["Option 1", "Option 2", "Option 3"]
+    }
+  ]
+}
