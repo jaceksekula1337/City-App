@@ -1,4 +1,3 @@
-// Property.js
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import TextField from "@material-ui/core/TextField";
@@ -11,6 +10,7 @@ import { updateProperty } from "./actions";
 const Property = ({ property }) => {
   const dispatch = useDispatch();
   const [editedProperty, setEditedProperty] = useState(property);
+  const [isImagePanelOpen, setIsImagePanelOpen] = useState(false);
 
   const handleBlur = () => {
     dispatch(updateProperty(editedProperty));
@@ -26,9 +26,13 @@ const Property = ({ property }) => {
     });
   };
 
+  const handleImagePanelToggle = () => {
+    setIsImagePanelOpen((prev) => !prev);
+  };
+
   return (
-    <div>
-      <h3>{property.name}</h3>
+    <div className="">
+      <h3>{property.label}</h3>
       {property.type === "text" && (
         <TextField
           name="value"
@@ -62,6 +66,17 @@ const Property = ({ property }) => {
           freeSolo
           renderInput={(params) => <TextField {...params} />}
         />
+      )}
+      {property.image && (
+        <>
+          <button onClick={handleImagePanelToggle}>Show Image</button>
+          {isImagePanelOpen && (
+            <div className="image-panel">
+              <img src={property.image} alt="Property Image" />
+              <button onClick={handleImagePanelToggle}>Hide Image</button>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
