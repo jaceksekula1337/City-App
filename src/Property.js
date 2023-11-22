@@ -4,10 +4,9 @@ import TextField from "@material-ui/core/TextField";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-
 import { updateProperty } from "./actions";
 
-const Property = ({ property }) => {
+const Property = ({ property, onImageClick }) => {
   const dispatch = useDispatch();
   const [editedProperty, setEditedProperty] = useState(property);
   const [isImagePanelOpen, setIsImagePanelOpen] = useState(false);
@@ -28,6 +27,11 @@ const Property = ({ property }) => {
 
   const handleImagePanelToggle = () => {
     setIsImagePanelOpen((prev) => !prev);
+    if (!isImagePanelOpen && property.image) {
+      onImageClick(property.image);
+    } else {
+      onImageClick(null); // Close the image panel
+    }
   };
 
   return (
@@ -70,12 +74,6 @@ const Property = ({ property }) => {
       {property.image && (
         <>
           <button onClick={handleImagePanelToggle}>Show Image</button>
-          {isImagePanelOpen && (
-            <div className="image-panel">
-              <img src={property.image} alt="Property Image" />
-              <button onClick={handleImagePanelToggle}>Hide Image</button>
-            </div>
-          )}
         </>
       )}
     </div>
