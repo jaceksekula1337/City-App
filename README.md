@@ -1,3 +1,22 @@
+ON TODAY:
+![image](https://github.com/jaceksekula1337/City-App/assets/110597769/333ecc43-01c5-4a46-9afe-b8bcb2455326)
+- Basic UI
+ -Working data fetching
+ -State management with Redux
+ - Grouped data depending on type
+TODO:
+- Better possibility to edit data
+- Showing images on the main page
+- Option to hide images
+- Improved component structure
+- Optimization and enhanced data fetching (e.g., displaying information when data is not available)
+- Better UI
+
+
+
+
+
+OPIS ZADANIA:
 Stwórz aplikację pozwalającą na edycję danych zawartych w załączonym Jsonie. Aplikacja powinna
 być responsywna.
 Załóżmy, że piszemy część większej aplikacji. W związku z tym edycja właściwości będzie się odbywać
