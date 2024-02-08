@@ -1,10 +1,15 @@
-ON TODAY:
+
 ![image](https://github.com/jaceksekula1337/City-App/assets/110597769/333ecc43-01c5-4a46-9afe-b8bcb2455326)
+
+ON TODAY:
+
 - Basic UI
- -Working data fetching
- -State management with Redux
- - Grouped data depending on type
+- Working data fetching
+- State management with Redux
+- Grouped data depending on type
+   
 TODO:
+
 - Better possibility to edit data
 - Showing images on the main page
 - Option to hide images
