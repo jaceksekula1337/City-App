@@ -16,6 +16,7 @@ TODO:
 - Improved component structure
 - Optimization and enhanced data fetching (e.g., displaying information when data is not available)
 - Better UI
+- E2E tests
 
 
 
