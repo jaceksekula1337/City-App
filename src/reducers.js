@@ -1,21 +1,26 @@
+// rootReducer.js
 import { UPDATE_PROPERTY } from "./actions";
-import data from "./data.json"; // Importuj dane z pliku data.json
+import data from "./data.json";
 
 const initialState = {
-  properties: data, // Ustaw dane z data.json jako początkowy stan properties
+  properties: data.properties,
 };
 
 const rootReducer = (state = initialState, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+
+  switch (type) {
     case UPDATE_PROPERTY:
-      const updatedProperties = state.properties.map((prop) =>
-        prop.name === action.payload.name ? action.payload : prop
-      );
-      return { ...state, properties: updatedProperties };
+      return {
+        ...state,
+        properties: state.properties.map((prop) =>
+          prop.label === payload.label ? payload : prop
+        ),
+      };
+
     default:
       return state;
   }
 };
-
 
 export default rootReducer;

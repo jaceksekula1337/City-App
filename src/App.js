@@ -1,37 +1,50 @@
-// App.js
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import Property from "./Property";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import Groups from "./Groups";
+import ImagePanel from "./ImagePanel";
+import Topbar from "./Topbar";
 
 function App() {
   const properties = useSelector((state) => state.data.properties);
 
-  const groupedProperties = {};
+  const uniqueGroups = Array.from(
+    new Set(properties.map((prop) => prop.group))
+  );
 
-  properties.properties.forEach((property) => {
-    if (!groupedProperties[property.group]) {
-      groupedProperties[property.group] = [];
-    }
-    groupedProperties[property.group].push(property);
-  });
+  const [expandedGroups, setExpandedGroups] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleGroupExpand = (groupName) => {
+    const isGroupExpanded = expandedGroups.includes(groupName);
+    setExpandedGroups((prev) =>
+      isGroupExpanded
+        ? prev.filter((group) => group !== groupName)
+        : [...prev, groupName]
+    );
+  };
+
+  const handleImageClick = (image) => {
+    setSelectedImage(image);
+  };
+
+  const handleImagePanelClose = () => {
+    setSelectedImage(null);
+  };
 
   return (
-    <div className="App">
-      {Object.entries(groupedProperties).map(([groupName, groupProperties]) => (
-        <ExpansionPanel key={groupName}>
-          <ExpansionPanelSummary>{groupName}</ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <div>
-              {groupProperties.map((property) => (
-                <Property key={property.name} property={property} />
-              ))}
-            </div>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-      ))}
+    <div className="bg-gray-400 text-white">
+      <Topbar />
+      <Groups
+        uniqueGroups={uniqueGroups}
+        expandedGroups={expandedGroups}
+        handleGroupExpand={handleGroupExpand}
+        properties={properties}
+        handleImageClick={handleImageClick}
+      />
+      <ImagePanel
+        selectedImage={selectedImage}
+        onClose={handleImagePanelClose}
+      />
     </div>
   );
 }
